@@ -1,4 +1,5 @@
-<?php include 'tarefa2.php'?>
+<?php require_once 'tarefa2.php';
+      require_once "ajudantes.php";?>
 <!DOCTYPE html>
 
 <html lang="en">
@@ -36,19 +37,19 @@
       <legend >Prioridade</legend>
       <div class="col-sm-10">
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="prioridade" id="gridRadios1" value="baixa" checked>
+          <input class="form-check-input" type="radio" name="prioridade" id="gridRadios1" value="1" checked>
           <label class="form-check-label" for="gridRadios1">
             Baixa
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="prioridade" id="gridRadios2" value="media">
+          <input class="form-check-input" type="radio" name="prioridade" id="gridRadios2" value="2">
           <label class="form-check-label" for="gridRadios2">
             Média
           </label>
         </div>
         <div class="form-check ">
-          <input class="form-check-input" type="radio" name="prioridade" id="gridRadios3" value="alta" >
+          <input class="form-check-input" type="radio" name="prioridade" id="gridRadios3" value="3" >
           <label class="form-check-label" for="gridRadios3">
             Alta
           </label>
@@ -87,7 +88,7 @@
                     <td><?php echo isset($tarefa['nome']) ? $tarefa['nome'] : ''; ?></td>
                     <td><?php echo isset($tarefa['descricao']) ? $tarefa['descricao'] : ''; ?></td>
                     <td><?php echo isset($tarefa['prazo']) ? $tarefa['prazo'] : ''; ?></td>
-                    <td><?php echo isset($tarefa['prioridade']) ? $tarefa['prioridade'] : ''; ?></td>
+                    <td><?php echo traduz_prioridade($tarefa['prioridade']); ?></td>
                     <td><?php echo isset($tarefa['concluida']) ? $tarefa['concluida'] : ''; ?></td>
                 </tr>
 

@@ -1,5 +1,6 @@
 <?php
     session_start(); 
+    require_once 'banco.php';
 
     if(isset($_GET['nome']) && $_GET['nome'] != ''){
         $tarefa = array();
@@ -29,12 +30,8 @@
             $tarefa['concluida'] = 'não';
         }
 
-        $_SESSION['lista'][] = $tarefa;
+       gravar_tarefa($conexao,$tarefa);
     }
     
-    if(isset($_SESSION['lista'])){
-        $lista_tarefas =  $_SESSION['lista'];
-    }else{
-        $lista_tarefas = array();
-    }
+   $lista_tarefas = buscar_tarefas($conexao);
 
