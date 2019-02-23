@@ -60,7 +60,7 @@
 
   <div class="form-group">
     <div class="form-check">
-      Concluída: <input  type="checkbox" value="sim" name="concluida" >
+      Concluída: <input  type="checkbox" value="1" name="concluida" >
     </div>
   </div>
   <input type="submit" class="btn btn-success btn-block" value="Salvar">
@@ -89,7 +89,7 @@
                     <td><?php echo isset($tarefa['descricao']) ? $tarefa['descricao'] : ''; ?></td>
                     <td><?php echo traduz_data_para_exibir($tarefa['prazo']); ?></td>
                     <td><?php echo traduz_prioridade($tarefa['prioridade']); ?></td>
-                    <td><?php echo isset($tarefa['concluida']) ? $tarefa['concluida'] : ''; ?></td>
+                    <td><?php echo traduz_concluida($tarefa['concluida']); ?></td>
                 </tr>
 
             <?php endforeach; ?>
