@@ -45,3 +45,10 @@ function traduz_data_para_exibir_versao2($data){
     $objeto_data = DateTime::createFromFormat('Y-m-d', $data);
     return $objeto_data->format('d/m/Y');
 }
+
+function traduz_concluida($concluida){
+    if ($concluida == 1) {
+        return'Sim';        
+    }
+    return'Não';
+}
