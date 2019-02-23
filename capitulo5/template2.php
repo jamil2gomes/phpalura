@@ -1,5 +1,5 @@
-<?php require_once 'tarefa2.php';
-      require_once "ajudantes.php";?>
+<?php require_once 'tarefa2.php';?>
+     
 <!DOCTYPE html>
 
 <html lang="en">
@@ -87,7 +87,7 @@
                 <tr>
                     <td><?php echo isset($tarefa['nome']) ? $tarefa['nome'] : ''; ?></td>
                     <td><?php echo isset($tarefa['descricao']) ? $tarefa['descricao'] : ''; ?></td>
-                    <td><?php echo isset($tarefa['prazo']) ? $tarefa['prazo'] : ''; ?></td>
+                    <td><?php echo traduz_data_para_exibir($tarefa['prazo']); ?></td>
                     <td><?php echo traduz_prioridade($tarefa['prioridade']); ?></td>
                     <td><?php echo isset($tarefa['concluida']) ? $tarefa['concluida'] : ''; ?></td>
                 </tr>
