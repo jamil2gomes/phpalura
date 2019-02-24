@@ -58,6 +58,6 @@ function editar_tarefa($conexao, $tarefa){
 }
 
 function remover_tarefa($conexao, $id){
-    $sql = "DELETE FROM tarefas WHERE id = {$id}";
-    mysqli_query($conexao, $sqlRemover);
+    $sql = "DELETE FROM tarefa WHERE id = {$id}";
+    mysqli_query($conexao, $sql);
 }
