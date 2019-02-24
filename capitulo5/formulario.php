@@ -1,16 +1,29 @@
 
-
+  
+            <?php if( $tem_erros && array_key_exists('nome', $erros_validacao)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?=$erros_validacao['nome'];?>
+                </div>
+            <?php endif; ?>
+            <?php if( $tem_erros && array_key_exists('prazo', $erros_validacao)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?=$erros_validacao['prazo'];?>
+                </div>
+            <?php endif; ?>
+           
 <form method="POST">
     <input type="hidden" name="id" value="<?=$tarefa['id']; ?>" />
-
+   
     <div class="form-group">
-        <label for="nome">Nome</label>
-        <input type="text" class="form-control is-valid"  name="nome"  value="<?=$tarefa['nome']; ?>"  required>
+       
+        <label for="nome">Nome *</label>
+        
+        <input type="text" class="form-control is-valid"  name="nome"  value="<?=$tarefa['nome']; ?>" >
     </div>
 
     <div class="form-group">
         <label for="prazo">Prazo</label>
-        <input type="text" class="form-control is-invalid"   name ="prazo"  value="<?=traduz_data_para_exibir($tarefa['prazo']); ?>"  >
+        <input type="text" class="form-control " placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off" name ="prazo"  value="<?=traduz_data_para_exibir($tarefa['prazo']); ?>"  >
     </div>
 
     <div class="form-group">
@@ -51,4 +64,4 @@
     </div>
  <input type="submit" class="btn btn-success btn-block" value="<?php echo ($tarefa['id'] > 0) ? 'Atualizar' : 'Cadastrar'; ?>">
 </form>
-  
+<span>* campo obrigatório</span>
