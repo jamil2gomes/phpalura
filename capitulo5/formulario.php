@@ -1,6 +1,6 @@
 
 
-<form>
+<form method="POST">
     <input type="hidden" name="id" value="<?=$tarefa['id']; ?>" />
 
     <div class="form-group">
