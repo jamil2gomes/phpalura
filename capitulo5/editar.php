@@ -38,7 +38,7 @@ require_once 'ajudantes.php';
 
         if(!$tem_erros){
             editar_tarefa($conexao, $tarefa);
-            header('Location: tarefa2.php');
+            header('Location: tarefa2.php#tabela');
             die();
         }
        
