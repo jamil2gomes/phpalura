@@ -1,7 +1,7 @@
 
 <div class="row">
     <div class="col-md-12">
-      <table class="table table-hover">
+      <table class="table table-hover" id="tabela">
       <thead >
           <tr>
               <th class="col">Tarefa</th>
@@ -17,7 +17,7 @@
               <?php foreach($lista_tarefas as $tarefa) : ?>
               
                   <tr>
-                      <td><?php echo isset($tarefa['nome']) ? $tarefa['nome'] : ''; ?></td>
+                      <td> <a href="detalhes-tarefa.php?id=<?=$tarefa['id']?>"><?=$tarefa['nome']?></a></td>
                       <td><?php echo isset($tarefa['descricao']) ? $tarefa['descricao'] : ''; ?></td>
                       <td><?php echo traduz_data_para_exibir($tarefa['prazo']); ?></td>
                       <td><?php echo traduz_prioridade($tarefa['prioridade']); ?></td>
