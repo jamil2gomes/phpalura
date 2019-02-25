@@ -10,7 +10,7 @@
                     <?=$erros_validacao['prazo'];?>
                 </div>
             <?php endif; ?>
-           
+<span>* campo obrigatório</span>     
 <form method="POST">
     <input type="hidden" name="id" value="<?=$tarefa['id']; ?>" />
    
@@ -64,4 +64,3 @@
     </div>
  <input type="submit" class="btn btn-success btn-block" value="<?php echo ($tarefa['id'] > 0) ? 'Atualizar' : 'Cadastrar'; ?>">
 </form>
-<span>* campo obrigatório</span>
