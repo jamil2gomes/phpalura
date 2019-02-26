@@ -15,7 +15,10 @@
       dados do estacionamento.<br>
          4. Faça uma opção no desafio do estacionamento para mostrar os 
        veículos  que  entraram  no  estacionamento  em  umadeterminada data.</p>
-    <p>Esse projeto se refere ao <strong> desafio 3 e 4 do capitulo 9</strong></p>
+       <p> Adicione    validação    também    para    o    projeto    do estacionamento.
+         As  placas  dos  veículos  devem  seguir  opadrão "AAA-0000", ou seja, três letras e 
+         quatro números.</p>
+    <p>Esse projeto se refere ao <strong> desafio 3 e 4 do capitulo 9</strong> e <strong>desafio 4 do capitulo 10</strong></p>
 
   <?php
     include "formulario.php";

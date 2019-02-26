@@ -31,6 +31,11 @@
         <label for="hora_saida">Horário de Saída</label>
         <input type="time" class="form-control" id="hora_saida" name="hora_saida" placeholder="00:00:00" value="<?=$veiculo['hora_saida']?>">
     </div>
+
+    <div class="form-group">
+        <label for="data">Data</label>
+        <input type="data" class="form-control" id="data" name="data" placeholder="dd/mm/aaaa" value="<?=traduz_data_para_exibir($veiculo['data'])?>">
+    </div>
     
 
    <input type="submit" class="btn btn-success" value="<?php echo ($veiculo['id'] > 0) ? 'Atualizar' : 'Cadastrar'; ?>">  

@@ -35,6 +35,8 @@
        
 
         $veiculo['hora_saida'] = (isset($_POST['hora_saida'])) ? $_POST['hora_saida'] : "";
+
+        $veiculo['data'] = (isset($_POST['data'])) ? traduz_data_para_banco($_POST['data']) : "";
       
         
         if (! $tem_erros) {
@@ -46,10 +48,11 @@
 
     }
 
-    if(isset($_GET['marca_procurada']) && $_GET['marca_procurada'] != "") {
-        $marca_procurada = $_GET['marca_procurada'];
+    if(isset($_GET['data_procurada']) && $_GET['data_procurada'] != "") {
+        $data_procurada = $_GET['data_procurada'];
+        $data_banco = traduz_data_para_banco($data_procurada);
         
-        $lista_veiculos = lista_veiculos_por_marca($conexao,  $marca_procurada);
+        $lista_veiculos = lista_veiculos_por_data($conexao, $data_banco);
     }else{
         $lista_veiculos = lista_veiculos($conexao);
     }
@@ -61,7 +64,8 @@
         'marca' => (isset($_POST['marca'])) ? $_POST['marca'] : '',
         'modelo' => (isset($_POST['modelo'])) ? $_POST['modelo'] : '',
         'hora_entrada' => (isset($_POST['hora_entrada'])) ? $_POST['hora_entrada'] : '',
-        'hora_saida' => (isset($_POST['hora_saida'])) ? $_POST['hora_saida'] : ''
+        'hora_saida' => (isset($_POST['hora_saida'])) ? $_POST['hora_saida'] : '',
+        'data' => (isset($_POST['data'])) ? $_POST['data'] : ''
     );
     
     include "template-veiculo.php";

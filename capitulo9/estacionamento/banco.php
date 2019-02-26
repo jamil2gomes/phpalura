@@ -31,7 +31,8 @@ function gravar_veiculo($conexao, $veiculo) {
             '{$veiculo['marca']}',
             '{$veiculo['modelo']}',
             '{$veiculo['hora_entrada']}',
-            '{$veiculo['hora_saida']}'
+            '{$veiculo['hora_saida']}',
+            '{$veiculo['data']}'
         )
     ";
     mysqli_query($conexao, $sqlGravar);
@@ -50,6 +51,7 @@ function editar_veiculo($conexao, $veiculo) {
             marca = '{$veiculo['marca']}',
             modelo = '{$veiculo['modelo']}',
             hora_entrada = '{$veiculo['hora_entrada']}',
+            data = '{$veiculo['data']}',
             hora_saida = '{$veiculo['hora_saida']}'
         WHERE id = {$veiculo['id']}
     ";
@@ -61,8 +63,8 @@ function remover_veiculo($conexao, $id) {
     mysqli_query($conexao, $sqlRemover);
 }
 
-function lista_veiculos_por_marca($conexao, $marca){
-    $sqlBusca = "SELECT * FROM veiculos WHERE marca = '{$marca}'";
+function lista_veiculos_por_data($conexao, $data){
+    $sqlBusca = "SELECT * FROM veiculos WHERE  data = '{$data}'";
         $resultado = mysqli_query($conexao, $sqlBusca);
     
         $veiculos = array();

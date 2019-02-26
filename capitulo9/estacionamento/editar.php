@@ -36,6 +36,8 @@ if (tem_post()) {
        
 
         $veiculo['hora_saida'] = (isset($_POST['hora_saida'])) ? $_POST['hora_saida'] : "";
+
+        $veiculo['data'] = (isset($_POST['data'])) ? traduz_data_para_banco($_POST['data']) : "";
       
 
     if (! $tem_erros) {
