@@ -10,7 +10,7 @@
 <body>
     <div class = "container">
         <h1>Tarefa: <?=$tarefa['nome']?></h1>
-        <p><a class="btn btn-warning btn-sm" href="tarefa2.php">Voltar</a></p><hr>
+        <p><a class="btn btn-warning btn-sm" href="tarefa.php">Voltar</a></p><hr>
 
         <p><strong>Concluída:</strong>
             <?=traduz_concluida($tarefa['concluida'])?>

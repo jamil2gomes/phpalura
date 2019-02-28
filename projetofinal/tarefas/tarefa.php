@@ -38,7 +38,12 @@
         
         if(!$tem_erros){
             gravar_tarefa($conexao,$tarefa);
-            header('Location: tarefa2.php');
+
+            if (array_key_exists('lembrete', $_POST) && $_POST['lembrete'] == '1'){
+                 enviar_email($tarefa);    
+            }
+            
+            header('Location: tarefa.php');
             die();
         }
        

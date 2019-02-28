@@ -1,4 +1,7 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 
 function tem_post(){
     if (count($_POST) > 0){
@@ -107,3 +110,49 @@ function tratar_anexo($anexo){
 }
 
 //---------------------------FIM 3.0--------------------------------------
+
+//4.0 - EMAIL
+
+function enviar_email($tarefa, $anexos = []){
+
+    
+    require 'bibliotecas/PHPMailer/src/Exception.php';
+    require 'bibliotecas/PHPMailer/src/PHPMailer.php';
+    require 'bibliotecas/PHPMailer/src/SMTP.php';
+   
+
+    $corpo = preparar_corpo_email($tarefa, $anexos);
+
+   
+    $email = new PHPMailer(true); 
+    $email->isSMTP();
+    $email->Host = "smtp.gmail.com";
+    $email->Port = 587;
+    $email->SMTPSecure = 'tls';
+    $email->SMTPAuth = true;
+    $email->Username = "jamil.lannister23@gmail.com";
+    $email->Password = "j4m1l!123";
+    $email->setFrom("user@user.com","Avisador de Tarefas");
+    $email->addAddress(EMAIL_NOTIFICACAO);
+    $email->Subject = "Aviso de tarefa: {$tarefa['nome']}";
+    $email->msgHTML($corpo);
+
+    foreach ($anexos as $anexo){
+        $email->addAttachment("anexos/{$anexo['arquivo']}");
+    }
+
+    $email->send();
+}
+
+function preparar_corpo_email($tarefa, $anexos){
+
+    ob_start();
+
+    include 'template_email.php';
+
+    $corpo = ob_get_contents();
+
+    ob_end_clean();
+
+    return $corpo;
+}

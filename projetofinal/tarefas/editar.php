@@ -38,7 +38,14 @@ require_once 'ajudantes.php';
 
         if(!$tem_erros){
             editar_tarefa($conexao, $tarefa);
-            header('Location: tarefa2.php#tabela');
+
+            if (array_key_exists('lembrete', $_POST) && $_POST['lembrete'] == '1'){
+
+                $anexos = buscar_anexos($conexao, $tarefa['id']);
+                enviar_email($tarefa, $anexos);    
+           }
+
+            header('Location: tarefa.php#tabela');
             die();
         }
        
