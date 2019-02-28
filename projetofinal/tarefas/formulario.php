@@ -62,5 +62,12 @@
         Concluída: <input  type="checkbox" value="1" name="concluida" <?php echo ($tarefa['concluida']==1)?'checked':'' ?>>
     </div>
     </div>
+
+    <div class="form-group">
+    <div class="form-check">
+        Lembrete por e-mail: <input  type="checkbox" value="1" name="lembrete" >
+    </div>
+    </div>
+
  <input type="submit" class="btn btn-success btn-block" value="<?php echo ($tarefa['id'] > 0) ? 'Atualizar' : 'Cadastrar'; ?>">
 </form>
