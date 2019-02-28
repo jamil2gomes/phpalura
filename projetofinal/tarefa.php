@@ -55,5 +55,5 @@
        'prioridade' => 1,
        'concluida'  => ''];
 
-    require_once 'template2.php';
+    require_once 'template.php';
 
