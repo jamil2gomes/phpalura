@@ -45,4 +45,4 @@ require_once 'ajudantes.php';
     }
     $tarefa = buscar_tarefa($conexao, $_GET['id']);
 
-    require 'template2.php';
+    require 'template.php';
