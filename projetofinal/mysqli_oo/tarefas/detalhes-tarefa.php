@@ -1,6 +1,11 @@
 <?php
-include"banco.php";
-include"ajudantes.php";
+include "banco.php";
+include "ajudantes.php";
+require 'classes/Tarefa.php';
+require 'classes/Anexo.php';
+require 'classes/TarefaRepositorio.php';
+
+$repositorio = new TarefaRepositorio($conexao);
 
 $tem_erros = false;
 $erros_validacao = [];
@@ -14,13 +19,13 @@ if (tem_post()) {
             $erros_validacao['anexo'] ='Você deve selecionar um arquivo para anexar';
         }
         else{
-                if (tratar_anexo($_FILES['anexo'])) {
-                    $nome = $_FILES['anexo']['name'];
-                    $anexo = [
-                                'tarefa_id' => $tarefa_id,
-                                'nome' => substr($nome, 0, -4), //pega o nome do arquivo menos o formato
-                                'arquivo' => $nome,
-                             ];
+                $dados_anexo  = $_FILES['anexo'];
+
+                if (tratar_anexo($dados_anexo)) {
+                   $anexo = new Anexo();
+                   $anexo->setTarefa_id($tarefa_id);
+                   $anexo->setNome( substr($dados_anexo['name'],0,-4) ); //nome do arquivo menos a extensão
+                   $anexo->setArquivo($dados_anexo['name']);//nome do arquivo com a extensao
                  
                 }else{
                     $tem_erros = true;
@@ -29,12 +34,10 @@ if (tem_post()) {
             }
 
     if(! $tem_erros) { 
-        gravar_anexo($conexao, $anexo); 
+       $repositorio->salvar_anexo($anexo);
     }
 }
 
-$tarefa = buscar_tarefa($conexao, $_GET['id']);
-
-$anexos = buscar_anexos($conexao, $_GET['id']);
+$tarefa = $repositorio->buscar($_GET['id']);
 
 require "template_detalhe_tarefa.php";

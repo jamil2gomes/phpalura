@@ -12,21 +12,18 @@
           </tr>
       </thead>
 
-        <?php if(isset($lista_tarefas) && is_array($lista_tarefas) && sizeof($lista_tarefas) > 0) : ?>
-              <?php foreach($lista_tarefas as $tarefa) : ?>
-              
+       
+              <?php foreach($tarefas as $tarefa) : ?>
                   <tr>
-                      <td> <a href="detalhes-tarefa.php?id=<?=$tarefa['id']?>"><?=$tarefa['nome']?></a></td>
-                      <td><?php echo isset($tarefa['descricao']) ? $tarefa['descricao'] : ''; ?></td>
-                      <td><?php echo traduz_data_para_exibir($tarefa['prazo']); ?></td>
-                      <td><?php echo traduz_prioridade($tarefa['prioridade']); ?></td>
-                      <td><?php echo traduz_concluida($tarefa['concluida']); ?></td>
-                      <td><a class="btn btn-info btn-block"   href="editar.php?id=<?=$tarefa['id'];?>">Editar</a>
-                          <a class="btn btn-danger btn-block" href="remover.php?id=<?=$tarefa['id'];?>">Remover</a>
+                      <td> <a href="detalhes-tarefa.php?id=<?=$tarefa->getId()?>"><?=$tarefa->getNome()?></a></td>
+                      <td><?=$tarefa->getDescricao() ?></td>
+                      <td><?=traduz_data_para_exibir($tarefa->getPrazo()); ?></td>
+                      <td><?=traduz_prioridade($tarefa->getPrioridade()); ?></td>
+                      <td><?=traduz_concluida($tarefa->getConcluida()); ?></td>
+                      <td><a class="btn btn-info btn-block"   href="editar.php?id=<?=$tarefa->getId()?>">Editar</a>
+                          <a class="btn btn-danger btn-block" href="remover.php?id=<?=$tarefa->getId()?>">Remover</a>
                       </td>
                   </tr>
-
               <?php endforeach; ?>
-          <?php endif;?>
       </table>
 </div>

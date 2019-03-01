@@ -2,6 +2,16 @@
 
 require_once 'banco.php';
 require_once 'ajudantes.php';
+require"classes/Tarefa.php";
+require "classes/Anexo.php"; 
+require"classes/TarefaRepositorio.php";
+
+    $repositorio = new TarefaRepositorio($conexao);
+    $tarefa = $repositorio->buscar($_GET['id']);
+    
+    echo"<pre>";
+    print_r($tarefa);
+    echo "</pre>";
 
     $exibir_tabela = false;
     $tem_erros = false;
@@ -10,46 +20,47 @@ require_once 'ajudantes.php';
     
     if(tem_post()){
 
-        $tarefa=[];
-        $tarefa['id'] = $_POST['id'];
-
         if(isset($_POST['nome'])  &&  strlen($_POST['nome']) > 0 ){ //validação do campo nome
-            $tarefa['nome'] =  $_POST['nome'];
+            $tarefa->setNome($_POST['nome']);
         }else{
             $tem_erros = true;
             $erros_validacao['nome'] = "O nome da tarefa é obrigatório!";
         }
 
-        $tarefa['descricao'] = (isset($_POST['descricao'])) ? $_POST['descricao'] : '';
+        if(isset($_POST['descricao'])){
+            $tarefa->setDescricao($_POST['descricao']);
+        }else{
+            $tarefa->setDescricao('');
+        } 
        
         if(isset($_POST['prazo'])  &&  strlen($_POST['prazo']) > 0 ){ //validação do campo prazo
             if(validar_data( $_POST['prazo'])){
-                 $tarefa['prazo'] =  traduz_data_para_banco( $_POST['prazo']);
+                 $tarefa->setPrazo(traduz_data_para_banco( $_POST['prazo']));
             }else{
                 $tem_erros = true;
                 $erros_validacao['prazo'] = "Data no formato errado! dd/mm/aaaa";
             }}else{
-                $tarefa['prazo'] = '';
+                $tarefa->setPrazo('');
             }
         
-        $tarefa['prioridade'] = (isset($_POST['prioridade'])) ? $_POST['prioridade'] : '';
+         if(isset($_POST['prioridade'])){
+             $tarefa->setPrioridade($_POST['prioridade']);
+            }
        
-        $tarefa['concluida'] = (isset($_POST['concluida']))? 1 : 0;
+       if(isset($_POST['concluida'])){
+           $tarefa->setConcluida(1);
+       }else{
+        $tarefa->setConcluida(0);
+       }
 
         if(!$tem_erros){
-            editar_tarefa($conexao, $tarefa);
-
-            if (array_key_exists('lembrete', $_POST) && $_POST['lembrete'] == '1'){
-
-                $anexos = buscar_anexos($conexao, $tarefa['id']);
-                enviar_email($tarefa, $anexos);    
-           }
+            $repositorio->atualizar($tarefa);
 
             header('Location: tarefa.php#tabela');
             die();
         }
        
     }
-    $tarefa = buscar_tarefa($conexao, $_GET['id']);
+   
 
     require 'template.php';

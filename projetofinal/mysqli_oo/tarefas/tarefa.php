@@ -2,47 +2,58 @@
     session_start(); 
     require_once 'banco.php';
     require_once 'ajudantes.php';
-    
+    require 'classes/Tarefa.php';
+    require 'classes/TarefaRepositorio.php';
+
+    $repositorio = new TarefaRepositorio($conexao);
 
     $exibir_tabela = true;
     $tem_erros = false;
     $erros_validacao = [];
 
+    $tarefa = new Tarefa();
+   
 
     if(tem_post()){
-        $tarefa = [];
-                       
+                      
         if(isset($_POST['nome'])  &&  strlen($_POST['nome']) > 0 ){ //validação do campo nome
-            $tarefa['nome'] =  $_POST['nome'];
+            $tarefa->setNome($_POST['nome']);
         }else{
             $tem_erros = true;
             $erros_validacao['nome'] = "O nome da tarefa é obrigatório!";
         }
+
+        if (isset($_POST['descricao'])) {
+            $tarefa->setDescricao($_POST['descricao']);
+        }else{
+            $tarefa->setDescricao('');
+        }
         
-        $tarefa['descricao'] = (isset($_POST['descricao']))? $_POST['descricao']: '';
-        
-                            
+                              
         if(isset($_POST['prazo'])  &&  strlen($_POST['prazo']) > 0 ){ //validação do campo prazo
             if(validar_data( $_POST['prazo'])){
-                 $tarefa['prazo'] =  traduz_data_para_banco( $_POST['prazo']);
+                 $tarefa->setPrazo(traduz_data_para_banco($_POST['prazo']));
             }else{
                 $tem_erros = true;
                 $erros_validacao['prazo'] = "Data no formato errado! dd/mm/aaaa";
-            }}else{
-                $tarefa['prazo'] = '';
             }
+        }else{
+            $tarefa->setPrazo('');
+        }
 
-        
-        $tarefa['prioridade'] = isset($_POST['prioridade']) ? $_POST['prioridade'] : '';
-        
-        $tarefa['concluida'] = (isset($_POST['concluida'])) ? 1 : 0;
-        
+        if(isset($_POST['prioridade'])){
+            $tarefa->setPrioridade($_POST['prioridade']);
+        }
+
+        if(isset($_POST['concluida'])){
+            $tarefa->setConcluida(1);
+        } else{
+            $tarefa->setConcluida(0);
+        }
+      
         if(!$tem_erros){
-            gravar_tarefa($conexao,$tarefa);
-
-            if (array_key_exists('lembrete', $_POST) && $_POST['lembrete'] == '1'){
-                 enviar_email($tarefa);    
-            }
+            
+            $repositorio->salvar($tarefa);
             
             header('Location: tarefa.php');
             die();
@@ -51,15 +62,9 @@
        
     }
     
-   $lista_tarefas = buscar_tarefas($conexao);
-   
-   $tarefa = [
-       'id'=> 0,
-       'nome'=> '',
-       'descricao'  => '',
-       'prazo'      => '',
-       'prioridade' => 1,
-       'concluida'  => ''];
+   $tarefas = $repositorio->buscar();
 
+   
+   
     require_once 'template.php';
 

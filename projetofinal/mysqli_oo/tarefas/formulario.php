@@ -12,23 +12,23 @@
             <?php endif; ?>
 <span>* campo obrigatório</span>     
 <form method="POST">
-    <input type="hidden" name="id" value="<?=$tarefa['id']; ?>" />
+    <input type="hidden" name="id" value="<?=$tarefa->getId(); ?>" />
    
     <div class="form-group">
        
         <label for="nome">Nome *</label>
         
-        <input type="text" class="form-control is-valid"  name="nome"  value="<?=$tarefa['nome']; ?>" >
+        <input type="text" class="form-control is-valid"  name="nome"  value="<?=$tarefa->getNome(); ?>" >
     </div>
 
     <div class="form-group">
         <label for="prazo">Prazo</label>
-        <input type="text" class="form-control " placeholder="Ex.: dd/mm/aaaa" data-mask="00/00/0000" maxlength="10" autocomplete="off" name ="prazo"  value="<?=traduz_data_para_exibir($tarefa['prazo']); ?>"  >
+        <input type="text" class="form-control " placeholder="Ex.: dd/mm/aaaa"  name ="prazo"  value="<?=traduz_data_para_exibir($tarefa->getPrazo()); ?>"  >
     </div>
 
     <div class="form-group">
         <label for="descricao">Descrição</label>
-        <textarea class="form-control is-invalid" id="validationTextarea" name="descricao"  value="<?=$tarefa['descricao']; ?>" ></textarea>
+        <textarea class="form-control is-invalid" id="validationTextarea" name="descricao"  value="<?=$tarefa->getDescricao(); ?>" ></textarea>
     </div>
 
     <fieldset class="form-group">
@@ -36,19 +36,19 @@
         <legend >Prioridade</legend>
         <div class="col-sm-10">
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="prioridade" id="gridRadios1" value="1" <?php echo ($tarefa['prioridade']==1)?'checked':''?>>
+            <input class="form-check-input" type="radio" name="prioridade" id="gridRadios1" value="1" <?php echo ($tarefa->getPrioridade()==1)?'checked':''?>>
             <label class="form-check-label" for="gridRadios1">
             Baixa
             </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="prioridade" id="gridRadios2" value="2" <?php echo ($tarefa['prioridade']==2)?'checked':'' ?>>
+            <input class="form-check-input" type="radio" name="prioridade" id="gridRadios2" value="2" <?php echo ($tarefa->getPrioridade()==2)?'checked':'' ?>>
             <label class="form-check-label" for="gridRadios2">
             Média
             </label>
         </div>
         <div class="form-check ">
-            <input class="form-check-input" type="radio" name="prioridade" id="gridRadios3" value="3"<?php echo ($tarefa['prioridade']==3)?'checked':'' ?> >
+            <input class="form-check-input" type="radio" name="prioridade" id="gridRadios3" value="3"<?php echo ($tarefa->getPrioridade()==3)?'checked':'' ?> >
             <label class="form-check-label" for="gridRadios3">
             Alta
             </label>
@@ -59,15 +59,9 @@
 
     <div class="form-group">
     <div class="form-check">
-        Concluída: <input  type="checkbox" value="1" name="concluida" <?php echo ($tarefa['concluida']==1)?'checked':'' ?>>
+        Concluída: <input  type="checkbox" value="1" name="concluida" <?php echo ($tarefa->getConcluida()==1)?'checked':'' ?>>
     </div>
     </div>
 
-    <div class="form-group">
-    <div class="form-check">
-        Lembrete por e-mail: <input  type="checkbox" value="1" name="lembrete" >
-    </div>
-    </div>
-
- <input type="submit" class="btn btn-success btn-block" value="<?php echo ($tarefa['id'] > 0) ? 'Atualizar' : 'Cadastrar'; ?>">
+ <input type="submit" class="btn btn-success btn-block" value="<?php echo ($tarefa->getId() > 0) ? 'Atualizar' : 'Cadastrar'; ?>">
 </form>

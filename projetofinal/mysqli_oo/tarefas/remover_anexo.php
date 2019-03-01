@@ -1,9 +1,10 @@
 <?php
 
 include 'banco.php';
-
-$anexo = buscar_anexo($conexao,$_GET['id']);
-
-remover_anexo($conexao, $anexo['id']);
-unlink('anexos/'. $anexo['arquivo']);
-header('Location: detalhes-tarefa.php?id=' . $anexo['tarefa_id']);
+require "classes/Anexo.php";
+require "classes/TarefaRepositorio.php";
+$repositorio_tarefas = new TarefaRepositorio($conexao);
+$anexo = $repositorio_tarefas->buscar_anexo($_GET['id']);
+$repositorio_tarefas->remover_anexo($anexo->getId());
+unlink('anexos/' . $anexo->getArquivo());
+header('Location: detalhes-tarefa.php?id=' . $anexo->getTarefa_id());
