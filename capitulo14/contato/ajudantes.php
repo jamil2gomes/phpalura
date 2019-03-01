@@ -92,6 +92,8 @@ function validar_cep($cep){
     $padrao = '/^\d{2}\.\d{3}\-\d{3}$/';//00.000-000
     $resultado = preg_match($padrao, $cep);
     return $resultado;
+
+
 }
 
 
