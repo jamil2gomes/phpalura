@@ -15,8 +15,8 @@
        
               <?php foreach($tarefas as $tarefa) : ?>
                   <tr>
-                      <td> <a href="detalhes-tarefa.php?id=<?=$tarefa->getId()?>"><?=$tarefa->getNome()?></a></td>
-                      <td><?=$tarefa->getDescricao() ?></td>
+                      <td> <a href="detalhes-tarefa.php?id=<?=$tarefa->getId()?>"><?=htmlentities($tarefa->getNome());?></a></td>
+                      <td><?=htmlentities($tarefa->getDescricao()); ?></td>
                       <td><?=traduz_data_para_exibir($tarefa->getPrazo()); ?></td>
                       <td><?=traduz_prioridade($tarefa->getPrioridade()); ?></td>
                       <td><?=traduz_concluida($tarefa->getConcluida()); ?></td>

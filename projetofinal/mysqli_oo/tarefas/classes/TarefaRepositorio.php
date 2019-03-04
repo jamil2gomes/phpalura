@@ -10,8 +10,8 @@ class TarefaRepositorio{
 
 
     public function salvar(Tarefa $tarefa){
-        $nome       = $this->conexao->real_escape_string($tarefa->getNome());
-        $descricao  = $this->conexao->real_escape_string($tarefa->getDescricao());
+        $nome       = strip_tags($this->conexao->real_escape_string($tarefa->getNome()));
+        $descricao  = strip_tags($this->conexao->real_escape_string($tarefa->getDescricao()));
         $prioridade = $tarefa->getPrioridade();
         $prazo      = $tarefa->getPrazo();
         $concluida  = ($tarefa->getConcluida()) ? 1 : 0;
@@ -33,8 +33,8 @@ class TarefaRepositorio{
 
     public function atualizar(Tarefa $tarefa){
         $id         = $tarefa->getId();
-        $nome       = $this->conexao->real_escape_string($tarefa->getNome());
-        $descricao  = $this->conexao->real_escape_string( $tarefa->getDescricao());
+        $nome       = strip_tags($this->conexao->real_escape_string($tarefa->getNome()));
+        $descricao  = strip_tags($this->conexao->real_escape_string( $tarefa->getDescricao()));
         $prioridade = $tarefa->getPrioridade();
         $prazo      = $tarefa->getPrazo();
         $concluida  = ($tarefa->getConcluida()) ? 1 : 0;
@@ -69,7 +69,7 @@ class TarefaRepositorio{
         }
         private function buscarTarefa($id)
         {
-            $id = $this->conexao->real_escape_string($id);
+            $id = strip_tags($this->conexao->real_escape_string($id));
 
             $sqlBusca = 'SELECT * FROM tarefa WHERE id = ' . $id;
             $resultado = $this->conexao->query($sqlBusca);
@@ -81,14 +81,14 @@ class TarefaRepositorio{
 
 
     public function remover($tarefa_id){
-        $tarefa_id = $this->conexao->real_escape_string($tarefa_id);
+        $tarefa_id = strip_tags($this->conexao->real_escape_string($tarefa_id));
          $sql = "DELETE FROM tarefa WHERE id = {$tarefa_id}";
          $this->conexao->query($sql);
     }
 
 
 public function buscar_anexos($tarefa_id){
-    $tarefa_id = $this->conexao->real_escape_string($tarefa_id);
+    $tarefa_id = strip_tags($this->conexao->real_escape_string($tarefa_id));
 
     $sql = "SELECT * from anexos where tarefa_id = {$tarefa_id}";
 
@@ -104,7 +104,7 @@ public function buscar_anexos($tarefa_id){
 
 public function buscar_anexo($anexo_id){
 
-    $anexo_id = $this->conexao->real_escape_string($anexo_id);
+    $anexo_id = strip_tags($this->conexao->real_escape_string($anexo_id));
 
     $sql = "SELECT * from anexos where id = {$anexo_id}";
 
@@ -115,18 +115,24 @@ public function buscar_anexo($anexo_id){
 
 
 public function salvar_anexo(Anexo $anexo){
+
+    $nome    = strip_tags($this->conexao->real_escape_string($anexo->getNome()));
+    $arquivo = strip_tags($this->conexao->real_escape_string($anexo->getArquivo()));
+    $tarefa_id = $anexo->getTarefa_id();
+
     $sql = "INSERT INTO anexos (nome, arquivo, tarefa_id) 
             VALUES (
-                        '{$this->conexao->real_escape_string($anexo->getNome())}',
-                        '{$this->conexao->real_escape_string($anexo->getArquivo())}',
-                        {$anexo->getTarefa_id()}
+                        '{$nome}',
+                        '{$arquivo}',
+                        {$tarefa_id}
                     )";
+
     $this->conexao->query($sql);
 
 }
 
 public function remover_anexo($id){
-    $id = $this->conexao->real_escape_string($id);
+    $id = strip_tags($this->conexao->real_escape_string($id));
 
     $sql = "DELETE FROM anexos WHERE id = {$id}";
     $this->conexao->query($sql);

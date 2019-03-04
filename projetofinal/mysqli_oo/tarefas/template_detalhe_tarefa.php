@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class = "container">
-        <h1>Tarefa: <?=$tarefa->getNome();?></h1>
+        <h1>Tarefa: <?=htmlentities($tarefa->getNome());?></h1>
         <p><a class="btn btn-warning btn-sm" href="tarefa.php">Voltar</a></p><hr>
 
         <p><strong>Concluída:</strong>
@@ -17,7 +17,7 @@
         </p>
 
         <p><strong>Descrição:</strong>
-            <?=$tarefa->getDescricao();?>
+            <?=htmlentities($tarefa->getDescricao());?>
         </p>
 
         <p><strong>Prazo:</strong>
@@ -43,7 +43,7 @@
                 <tbody>
                 <?php foreach ($tarefa->getAnexos() as $anexo):?>
                     <tr>
-                        <td><?=$anexo->getNome();?></td>
+                        <td><?=htmlentites($anexo->getNome());?></td>
                         <td><a class = "btn btn-info " href="anexos/<?=$anexo->getArquivo();?>">Download</a>
                         <a class = "btn btn-danger " href="remover_anexo.php?id=<?=$anexo->getId();?>">Remover</a></td>
 
