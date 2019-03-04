@@ -18,7 +18,7 @@
        
         <label for="nome">Nome *</label>
         
-        <input type="text" class="form-control is-valid"  name="nome"  value="<?=$tarefa->getNome(); ?>" >
+        <input type="text" class="form-control is-valid"  name="nome"  value="<?=htmlentities($tarefa->getNome()); ?>" >
     </div>
 
     <div class="form-group">
@@ -28,7 +28,7 @@
 
     <div class="form-group">
         <label for="descricao">Descrição</label>
-        <textarea class="form-control is-invalid" id="validationTextarea" name="descricao"  value="<?=$tarefa->getDescricao(); ?>" ></textarea>
+        <textarea class="form-control is-invalid" id="validationTextarea" name="descricao"  value="<?=htmlentities($tarefa->getDescricao()); ?>" ></textarea>
     </div>
 
     <fieldset class="form-group">

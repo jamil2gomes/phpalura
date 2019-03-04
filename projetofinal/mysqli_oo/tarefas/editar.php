@@ -9,9 +9,6 @@ require"classes/TarefaRepositorio.php";
     $repositorio = new TarefaRepositorio($conexao);
     $tarefa = $repositorio->buscar($_GET['id']);
     
-    echo"<pre>";
-    print_r($tarefa);
-    echo "</pre>";
 
     $exibir_tabela = false;
     $tem_erros = false;
